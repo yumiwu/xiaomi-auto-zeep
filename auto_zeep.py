@@ -3,7 +3,8 @@
 """
 自动跑步步数提交脚本
 功能：自动为多个账号提交跑步步数，支持GitHub Actions定时执行
-作者：自动生成
+作者：gaocaipeng
+仓库：https://github.com/gaocaipeng/xiaomi-auto-zeep
 """
 
 import requests  # 用于发送网络请求
