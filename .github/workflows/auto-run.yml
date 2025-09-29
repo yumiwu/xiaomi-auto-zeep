@@ -1,9 +1,13 @@
 name: 自动跑步步数提交
 
 on:
-  # 每天北京时间早上8点执行
+  # 每天多个时间段执行，模拟真实运动时间
   schedule:
-    - cron: '0 0 * * *'  # UTC时间0点，即北京时间8点
+    - cron: '0 0 * * *'   # UTC时间0点，即北京时间8点（晨跑）
+    - cron: '4 0 * * *'   # UTC时间4点，即北京时间12点（午休运动）
+    - cron: '8 0 * * *'   # UTC时间8点，即北京时间16点（下午锻炼）
+    - cron: '12 0 * * *'  # UTC时间12点，即北京时间20点（晚间运动）
+    - cron: '14 0 * * *'  # UTC时间14点，即北京时间22点（夜跑）
   # 允许手动触发
   workflow_dispatch:
 
@@ -33,10 +37,3 @@ jobs:
         ACCOUNT2_PASSWORD: ${{ secrets.ACCOUNT2_PASSWORD }}
       run: |
         python auto_zeep.py
-        
-    - name: 发送通知（可选）
-      if: always()
-      run: |
-        echo "步数提交任务完成"
-        echo "执行时间: $(date)"
-
