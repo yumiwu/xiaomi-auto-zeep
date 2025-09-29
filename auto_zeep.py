@@ -83,10 +83,11 @@ class StepSubmitter:
         # 步数提交的API地址
         self.base_url = 'https://wzz.wangzouzou.com/motion/api/motion/Xiaomi'
          
-    def get_current_steps(self):
+    def get_current_steps(self, account_index=0):
         """
         根据当前时间智能生成步数
         让生成的步数更符合真实情况
+        每个账号的步数都会有所不同
         """
         current_hour = datetime.now().hour
         logger.info(f"🕐 当前时间: {datetime.now()}, 小时: {current_hour}")
@@ -105,11 +106,18 @@ class StepSubmitter:
         # 如果找到接近的配置且在合理范围内（2小时内），使用该配置
         if min_diff <= 2 and closest_hour in STEP_RANGES:
             step_config = STEP_RANGES[closest_hour]
-            steps = random.randint(step_config['min'], step_config['max'])
-            logger.info(f"✅ 使用 {closest_hour} 点配置，生成步数: {steps}")
+            # 为每个账号添加不同的随机偏移，让步数更真实
+            base_steps = random.randint(step_config['min'], step_config['max'])
+            # 根据账号索引添加不同的偏移量（-500到+500步）
+            offset = random.randint(-500, 500)
+            steps = max(1000, base_steps + offset)  # 确保步数不少于1000
+            logger.info(f"✅ 使用 {closest_hour} 点配置，账号{account_index+1}生成步数: {steps}")
         else:
-            steps = DEFAULT_STEPS
-            logger.info(f"✅ 使用默认步数: {steps}")
+            # 默认步数也添加账号差异
+            base_steps = DEFAULT_STEPS
+            offset = random.randint(-1000, 1000)  # 默认步数的偏移范围更大
+            steps = max(1000, base_steps + offset)
+            logger.info(f"✅ 使用默认步数，账号{account_index+1}生成步数: {steps}")
          
         return steps
      
@@ -211,8 +219,8 @@ class StepSubmitter:
             logger.info(f"🔄 处理第 {i}/{len(ACCOUNTS)} 个账号: {account['username']}")
              
             try:
-                # 获取当前应提交的步数
-                steps = self.get_current_steps()
+                # 获取当前应提交的步数（传入账号索引，让每个账号步数不同）
+                steps = self.get_current_steps(i - 1)
                  
                 # 提交步数到服务器
                 success, message = self.submit_steps(
