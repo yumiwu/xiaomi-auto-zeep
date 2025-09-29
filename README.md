@@ -31,47 +31,23 @@
 - 代码中不包含任何敏感信息
 - 支持最多5个账号同时运行
 
-## 🚀 快速开始（2分钟搞定）
+## 🚀 快速开始（3分钟搞定）
 
-### 方法一：使用设置页面（推荐！）
+### 第一步：上传代码到GitHub
 
-1. **上传代码到GitHub**
-   - 在GitHub上创建一个新仓库
-   - 把代码文件上传到仓库里
-   - 确保这些文件都在仓库里：
-     - `auto_zeep.py`（主程序）
-     - `requirements.txt`（依赖包）
-     - `.github/workflows/auto-run.yml`（自动运行配置）
-     - `setup.html`（设置页面）
+1. 在GitHub上创建一个新仓库
+2. 把代码文件上传到仓库里
+3. 确保这些文件都在仓库里：
+   - `auto_zeep.py`（主程序）
+   - `requirements.txt`（依赖包）
+   - `.github/workflows/auto-run.yml`（自动运行配置）
 
-2. **打开设置页面**
-   - 在浏览器中打开 `setup.html` 文件
-   - 或者将 `setup.html` 上传到GitHub Pages
+### 第二步：设置账号密码（重要！）
 
-3. **一键设置账号**
-   - 输入你的GitHub Token
-   - 点击"查看已设置的账号"查看现有配置
-   - 或点击"添加新账号"添加新账号
-   - 点击"保存账号信息到GitHub"完成设置
-
-4. **启用自动运行**
-   - 进入仓库的 **Actions** 页面
-   - 点击 **自动跑步步数提交** 工作流
-   - 点击 **Enable workflow** 启用
-
-**完成！** 🎉 现在脚本会每天北京时间早上8点自动运行。
-
-### 方法二：手动设置（传统方式）
-
-1. **上传代码到GitHub**
-   - 在GitHub上创建一个新仓库
-   - 把代码文件上传到仓库里
-
-2. **手动设置Secrets**
-   - 进入你的GitHub仓库
-   - 点击 **Settings**（设置）
-   - 在左侧菜单找到 **Secrets and variables** → **Actions**
-   - 点击 **New repository secret** 添加以下信息：
+1. 进入你的GitHub仓库
+2. 点击 **Settings**（设置）
+3. 在左侧菜单找到 **Secrets and variables** → **Actions**
+4. 点击 **New repository secret** 添加以下信息：
 
 **必须添加的Secrets：**
 - `ACCOUNT1_USERNAME`：你的第一个账号（手机号或邮箱）
@@ -87,10 +63,13 @@
 - `ACCOUNT5_USERNAME`：第五个账号
 - `ACCOUNT5_PASSWORD`：第五个账号密码
 
-3. **启用自动运行**
-   - 进入仓库的 **Actions** 页面
-   - 点击 **自动跑步步数提交** 工作流
-   - 点击 **Enable workflow** 启用
+### 第三步：启用自动运行
+
+1. 进入仓库的 **Actions** 页面
+2. 点击 **自动跑步步数提交** 工作流
+3. 点击 **Enable workflow** 启用
+
+**完成！** 🎉 现在脚本会每天北京时间早上8点自动运行。
 
 ## 📱 如何查看运行结果
 
@@ -156,26 +135,7 @@ A: 非常安全！你的账号密码存储在GitHub的加密环境中，只有�
 | `auto_zeep.py` | 主程序，负责提交步数 |
 | `requirements.txt` | Python依赖包列表 |
 | `.github/workflows/auto-run.yml` | GitHub自动运行配置 |
-| `setup.html` | 🆕 设置页面，可视化管理账号 |
 | `README.md` | 这个说明文档 |
-
-## 🆕 新功能：可视化设置页面
-
-现在你可以使用 `setup.html` 页面来管理账号信息：
-
-### ✨ 主要功能
-- 🔍 **查看已设置的账号**：显示当前GitHub中存储的账号信息
-- ✏️ **修改账号信息**：可以修改用户名和密码
-- ➕ **添加新账号**：支持添加更多账号
-- 🗑️ **删除账号**：可以删除不需要的账号
-- 🔒 **安全存储**：所有操作都通过GitHub API安全进行
-
-### 🎯 使用方法
-1. 在浏览器中打开 `setup.html`
-2. 输入你的GitHub Token
-3. 选择"查看已设置的账号"或"添加新账号"
-4. 填写或修改账号信息
-5. 点击"保存账号信息到GitHub"完成设置
 
 ## ⚠️ 重要提醒
 
